@@ -16,3 +16,4 @@ Then you can run:
 ```
 git clone https://github.com/Jmatop/Calipso.git
 ```
+For install Calipso only run ``` sudo bash install.sh```
