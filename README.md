@@ -1,4 +1,7 @@
-<img align="left" width="50%" height="100%" src="https://user-images.githubusercontent.com/91370388/159025827-bb050ff3-db9c-44e8-bc69-0e750156fb05.png">
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/91370388/159025827-bb050ff3-db9c-44e8-bc69-0e750156fb05.png">
+</p>
+
 
 
 **Calipso is a final project for 2n from ASIX at the Puig Castellar institute whose main function is to scan all the network traffic and show it in a graph and also tells you if you are being attacked and with what protocol you are being attacked.**
