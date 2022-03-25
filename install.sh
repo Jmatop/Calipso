@@ -4,7 +4,7 @@
 sudo apt update
 
 #Instalamos Suricata
-sudo add-apt-repository ppa:oisf/suricata-stable && sudo apt install --yes surica>
+sudo add-apt-repository ppa:oisf/suricata-stable && sudo apt install --yes suricata
 
 #sudo apt install --yes software-properties-common
 #sudo apt install --yes suricata
@@ -13,3 +13,5 @@ sudo add-apt-repository ppa:oisf/suricata-stable && sudo apt install --yes suric
 sudo systemctl enable suricata.service
 sudo suricata-update
 
+#Instalamos servidor Apache
+sudo apt install --yes apache2
