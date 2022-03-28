@@ -32,4 +32,6 @@ git clone https://github.com/rajkumardusad/IP-Tracer.git
 cd IP-Tracer
 chmod +x install
 ./install
+#Ejemplo comandos IP Tracer:
+#trace -t dirección ip
 
