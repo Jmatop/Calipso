@@ -5,7 +5,6 @@ sudo apt update
 
 #Instalamos Suricata
 sudo add-apt-repository ppa:oisf/suricata-stable && sudo apt install --yes suricata
-
 sudo apt install --yes software-properties-common
 sudo apt install --yes suricata
 
