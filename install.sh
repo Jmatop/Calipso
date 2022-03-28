@@ -23,3 +23,6 @@ sudo checkinstall -y --deldoc=yes
 sudo apt-get install -y pip
 sudo apt install -y yara
 git clone https://github.com/Yara-Rules/rules.git
+#Para ejecutar las reglas Yara el comando que se usa es:
+#yara -f /home/rules/index.yar /home/calipso/
+
