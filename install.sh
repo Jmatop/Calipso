@@ -26,3 +26,10 @@ git clone https://github.com/Yara-Rules/rules.git
 #Para ejecutar las reglas Yara el comando que se usa es:
 #yara -f /home/rules/index.yar /home/calipso/
 
+
+#Instalamos el IP Tracer
+git clone https://github.com/rajkumardusad/IP-Tracer.git
+cd IP-Tracer
+chmod +x install
+./install
+
