@@ -35,4 +35,6 @@ chmod +x install
 ./install
 #Ejemplo comandos IP Tracer:
 #trace -t dirección ip
-
+echo "Ready."
+sleep 5 
+clear
