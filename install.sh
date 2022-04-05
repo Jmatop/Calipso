@@ -37,11 +37,12 @@ chmod +x install
 #trace -t dirección ip
 
 #Instalación OpenSearch
+sudo apt update -y
 source /etc/os-release
-echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
-apt-get update
-sudo apt install -y podman
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | sudo apt-key add -
+sudo apt update -qq
+sudo apt-get -qq --yes install podman
 
 #Configuración OpenSearch
 podman pod create -n miOS -p 9200:9200 -p 9600:9600 -p 5601:5601
