@@ -47,8 +47,9 @@ sudo apt-get -qq --yes install podman
 #Configuración OpenSearch
 podman pod create -n miOS -p 9200:9200 -p 9600:9600 -p 5601:5601
 sleep 30
-podman container create --pod=miOS -e "discovery.type=single-node" opensearchproject/opensearch:latest
+podman container create --pod=miOS -e "discovery.type=single-node" opensearchproject/opensearch:1.2.3
 podman container create --pod=miOS -e "opensearch.username=admin" -e "opensearch.password=admin" -e "opensearch.ssl.verificationMode=none" opensearchproject/opensearch-dashboards:latest
+sleep 10
 podman pod start miOS
 
 echo "Ready."
