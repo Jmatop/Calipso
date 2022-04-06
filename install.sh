@@ -36,7 +36,7 @@ chmod +x install
 #Ejemplo comandos IP Tracer:
 #trace -t dirección ip
 
-#Instalación OpenSearch
+#Instalación Podman
 sudo apt update -y
 source /etc/os-release
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
