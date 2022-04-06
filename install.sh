@@ -44,8 +44,8 @@ wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:st
 sudo apt update -qq
 sudo apt-get -qq --yes install podman
 
-bash opensearch.sh
-
-echo "Ready."
+echo "Configurating OpenSearch."
 sleep 5 
+
+bash opensearch.sh
 clear
