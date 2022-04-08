@@ -1,15 +1,14 @@
 #!/bin/bash
 
-tput setaf 6
-echo "Actualizamos librerias "
+
+echo "$(tput setaf 6)Actualizamos librerias "
 tput reset
 sleep 3
 sudo apt update
 
 
 
-tput setaf 4
-echo "Instalamos Suricata"
+echo "$(tput setaf 4)Instalamos Suricata"
 tput reset
 sleep 3
 sudo add-apt-repository ppa:oisf/suricata-stable 
@@ -17,22 +16,19 @@ sudo apt install --yes software-properties-common
 sudo apt install --yes suricata
 
 
-tput setaf 5
-echo "Habilitamos Suricata"
+echo "$(tput setaf 5)Habilitamos Suricata"
 tput reset
 sudo systemctl enable suricata.service
 sudo suricata-update
 
 
-tput setaf 6
-echo "Instalamos servidor Apache"
+echo "$(tput setaf 6)Instalamos servidor Apache"
 tput reset
 sleep 3
 sudo apt install --yes apache2
 
 
-tput setaf 2
-echo "Instalamos las dependencias para Yara"
+echo "$(tput setaf 2)Instalamos las dependencias para Yara"
 tput reset
 sleep 3
 sudo apt-get install -y automake libtool make gcc flex bison libssl-dev libjansson-dev libmagic-dev
@@ -45,8 +41,7 @@ git clone https://github.com/Yara-Rules/rules.git
 #yara -f /home/rules/index.yar /home/calipso/
 
 
-tput setaf 3
-echo "Instalamos el IP Tracer"
+echo "$(tput setaf 3)Instalamos el IP Tracer"
 tput reset
 sleep 3
 git clone https://github.com/rajkumardusad/IP-Tracer.git
@@ -57,8 +52,7 @@ cd $HOME
 #Ejemplo comandos IP Tracer:
 #trace -t dirección ip
 
-tput setaf 3
-echo "Instalación Podman"
+echo "$(tput setaf 3)Instalación Podman"
 tput reset
 sleep 3
 sudo apt update -y
@@ -69,8 +63,7 @@ sudo apt update -qq
 sudo apt-get -qq --yes install podman
 
 
-tput setaf 2
-echo "Configuración OpenSearch"
+echo "$(tput setaf 2)Configuración OpenSearch"
 tput reset
 sleep 3
 podman pod create -n miOS -p 9200:9200 -p 9600:9600 -p 5601:5601
