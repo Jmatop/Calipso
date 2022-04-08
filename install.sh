@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "$(tput setaf 6)Actualizamos librerias "
+tput setaf 6
+echo "Actualizamos librerias "
+tput reset
 sleep 3
 sudo apt update
 
@@ -11,15 +13,17 @@ sleep 3
 sudo add-apt-repository ppa:oisf/suricata-stable 
 sudo apt install --yes software-properties-common
 sudo apt install --yes suricata
-
+tput reset
 
 echo "$(tput setaf 5)Habilitamos Suricata"
 #sudo systemctl enable suricata.service
 #sudo suricata-update
+tput reset
 
 echo "$(tput setaf 6)Instalamos servidor Apache"
 sleep 3
 sudo apt install --yes apache2
+tput reset
 
 echo "$(tput setaf 2)Instalamos las dependencias para Yara"
 sleep 3
@@ -32,12 +36,14 @@ git clone https://github.com/Yara-Rules/rules.git
 #Para ejecutar las reglas Yara el comando que se usa es:
 #yara -f /home/rules/index.yar /home/calipso/
 
+
 echo "$(tput setaf 3)Instalamos el IP Tracer"
 sleep 3
 git clone https://github.com/rajkumardusad/IP-Tracer.git
 cd IP-Tracer
 chmod +x install
 ./install
+cd $HOME
 #Ejemplo comandos IP Tracer:
 #trace -t dirección ip
 
