@@ -62,6 +62,11 @@ sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/li
 wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | sudo apt-key add -
 sudo apt update -qq
 sudo apt-get -qq --yes install podman
+sudo systemctl start podman
+sudo systemctl enable podman
+sudo systemctl stop ufw 
+sudo systemctl disable ufw
+
 
 
 echo "$(tput setaf 2)Configuración OpenSearch"
