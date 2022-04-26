@@ -15,7 +15,7 @@ echo "$(tput setaf 6)Actualizamos librerias "
 sleep 3
 tput reset
 sudo apt update
-apt install curl
+apt install --yes curl
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
