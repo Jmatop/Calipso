@@ -15,14 +15,13 @@ echo "$(tput setaf 6)Actualizamos librerias "
 sleep 3
 tput reset
 sudo apt update
+apt install curl
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*           Instalación Suricata          *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-
-echo "$(tput setaf 4)Instalamos Suricata"
 sleep 3
 tput reset
 sudo add-apt-repository ppa:oisf/suricata-stable 
