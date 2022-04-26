@@ -98,3 +98,41 @@ if (( $funciona == 0 )); then
 else
         echo "No funciona"
 fi
+echo -e "\e[1;32m*****************************************************"
+echo -e "*                                                   *"
+echo -e "*           Creación de Repositorio Kibana          *"
+echo -e "*                                                   *"
+echo -e "*****************************************************\e[0m"
+echo "[kibana-8.x]" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "name=Kibana repository for 8.x packages" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "baseurl=https://artifacts.elastic.co/packages/8.x/yum" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "gpgcheck=1" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch"| sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "enabled=1" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "autorefresh=1" | sudo tee -a /etc/yum.repos.d/kibana.repo
+echo "type=rpm-md" | sudo tee -a /etc/yum.repos.d/kibana.repo
+
+echo -e "\e[1;32m****************************************"
+echo -e "*                                      *"
+echo -e "*           Instalando Kibana          *"
+echo -e "*                                      *"
+echo -e "****************************************\e[0m"
+sudo dnf -y install kibana
+echo -e "\e[1;32m*******************************************"
+echo -e "*                                         *"
+echo -e "*           Configuración Kibana          *"
+echo -e "*                                         *"
+echo -e "*******************************************\e[0m"
+sudo sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/' /etc/kibana/kibana.yml
+token=$(sudo /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana)
+echo "Token-kibana:" $token | sudo tee -a config-elastic.txt
+sudo /bin/systemctl daemon-reload
+sudo systemctl start kibana.service
+sudo /bin/systemctl enable kibana.service
+echo -e "\e[1;32mEsperando Codigo....\e[0m"
+sleep 50
+codigo=$(journalctl -u kibana.service | grep "code=" | awk '{print $8}')
+echo "Code Verification:" $codigo | sudo tee -a config-elastic.txt
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
