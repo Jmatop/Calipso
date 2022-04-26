@@ -117,7 +117,7 @@ echo -e "*                                      *"
 echo -e "*           Instalando Kibana          *"
 echo -e "*                                      *"
 echo -e "****************************************\e[0m"
-sudo dnf -y install kibana
+sudo apt install-y kibana
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*           Configuración Kibana          *"
