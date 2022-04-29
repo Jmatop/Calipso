@@ -114,7 +114,6 @@ codigo=$(journalctl -u kibana.service | grep "code=" | awk '{print $8}')
 echo "Code Verification:" $codigo | sudo tee -a config-elastic.txt
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
-echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
@@ -142,4 +141,8 @@ echo "journalctl -u tcpdump1.service | grep -c UDP  > /home/$USER/salidaUDP.data
 echo "journalctl -u tcpdump1.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
 echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
 echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
+
+
+
+echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
 
