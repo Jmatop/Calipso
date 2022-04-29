@@ -115,3 +115,10 @@ echo "Code Verification:" $codigo | sudo tee -a config-elastic.txt
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
+
+echo "[UNIT]" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "Description=TCPDUMP" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "Type=simple" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "ExecStart=tcpdump" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "[Install]" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tcpdump2.service
