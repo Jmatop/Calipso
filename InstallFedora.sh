@@ -116,9 +116,30 @@ sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
 
+echo -e "\e[1;32m*******************************************"
+echo -e "*                                         *"
+echo -e "*           Creando el servicio           *"
+echo -e "*                                         *"
+echo -e "*******************************************\e[0m"
 echo "[UNIT]" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "Description=TCPDUMP" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "ExecStart=tcpdump" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tcpdump2.service
+
+echo -e "\e[1;32m*******************************************"
+echo -e "*                                         *"
+echo -e "*           Creando lectores              *"
+echo -e "*                                         *"
+echo -e "*******************************************\e[0m"
+echo "#!/bin/bash" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump1.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
+echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
+
