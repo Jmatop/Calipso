@@ -62,12 +62,17 @@ echo -e "*                                             *"
 echo -e "*           Instalando ElasticSearch          *"
 echo -e "*                                             *"
 echo -e "***********************************************\e[0m"
+#Instalamos elasticsearch, pero vamos guardando su salida en el fichero prueba.txt
 sudo dnf -y install --enablerepo=elasticsearch elasticsearch > prueba.txt
+#Reiniciamos el systemd y habilitamos e iniciamos el servicio de elasticsearch 
 sudo /bin/systemctl daemon-reload
 sudo /bin/systemctl enable elasticsearch.service
 sudo systemctl start elasticsearch.service
+#Guardamos en una variable la contraseña, haciendo una busqueda en el fichero prueba.txt que es el que contiene la salida de la instalación
 pass=$(cat prueba.txt | grep "generated password for the elastic built-in superuser " | awk '{print $11}')
+#Lo guardamos en el fichero que va a contener todas las credenciales necesarias para el usuario
 echo "password-elastic:" $pass | sudo tee -a config-elastic.txt
+#Y eliminamos el fichero que contenia la salida de la instalación
 rm prueba.txt
 sleep 20
 sudo curl -s --cacert /etc/elasticsearch/certs/http_ca.crt -k -u elastic:$pass https://localhost:9200 | grep "You Know, for Search"  > /dev/null
