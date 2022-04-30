@@ -107,9 +107,15 @@ echo -e "*                                         *"
 echo -e "*           Configuración Kibana          *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
+#Remplazamos con el comando sed, la linea server.host del fichero de configuracion de kibana, y lo cambiamos a 0.0.0.0 para que tambien se pueda acceder
+#de forma remota en la web a kibana.
 sudo sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/' /etc/kibana/kibana.yml
+#Tenemos la opcion de que Elastic luego se encargue de configurar por si mismo kibana, para ello tenemos que crear un token para kibana con el comando: 
+#elasticsearch-create-enrollment-token, tambien guardamos la salida de este comando en la variable token
 token=$(sudo /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana)
+#Ya guardada la variable, lo guardamos en el fichero que es el que contiene lo necesario para luego finalizar la instalación.
 echo "Token-kibana:" $token | sudo tee -a config-elastic.txt
+#Se reinicia el systemd, e iniciamos y habilitamos kibana.
 sudo /bin/systemctl daemon-reload
 sudo systemctl start kibana.service
 sudo /bin/systemctl enable kibana.service
