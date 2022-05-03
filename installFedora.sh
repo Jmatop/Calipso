@@ -145,6 +145,7 @@ echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
+//setenforce 0
 echo "ExecStart=/home/$USER/tshark.sh" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
