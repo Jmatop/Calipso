@@ -128,16 +128,29 @@ sudo systemctl disable firewalld
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
+echo -e "*           Creando el tshark           *"
+echo -e "*                                         *"
+echo -e "*******************************************\e[0m"
+sudo dnf -y install wireshark-cli
+echo "#!/bin/bash" | sudo tee -a /home/$USER/tshark.sh
+echo "sudo tshark" | sudo tee -a /home/$USER/tshark.sh
+
+
+echo -e "\e[1;32m*******************************************"
+echo -e "*                                         *"
 echo -e "*           Creando el servicio           *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-echo "[Unit]" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "Description=TCPDUMP" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "[Service]" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "Type=simple" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "ExecStart=tcpdump" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "[Install]" | sudo tee -a /etc/systemd/system/tcpdump2.service
-echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
+echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
+echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
+echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
+echo "ExecStart=/home/$USER/tshark.sh" | sudo tee -a /etc/systemd/system/tshark.service
+echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
+echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
+
+sudo systemctl daemon-reload
+sudo systemctl start tshark.service
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
@@ -145,12 +158,12 @@ echo -e "*           Creando lectores              *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
 echo "#!/bin/bash" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump2.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tshark.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
 echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
 echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
 
