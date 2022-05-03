@@ -145,12 +145,12 @@ echo -e "*           Creando lectores              *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
 echo "#!/bin/bash" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tcpdump1.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
+echo "journalctl -u tcpdump2.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
 echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
 echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
 
