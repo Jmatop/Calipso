@@ -131,8 +131,9 @@ echo -e "*                                         *"
 echo -e "*           Creando el servicio           *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-echo "[UNIT]" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "[Unit]" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "Description=TCPDUMP" | sudo tee -a /etc/systemd/system/tcpdump2.service
+echo "[Service]" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "ExecStart=tcpdump" | sudo tee -a /etc/systemd/system/tcpdump2.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tcpdump2.service
