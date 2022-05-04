@@ -150,8 +150,8 @@ echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 
 #sudo setenforce 0
-sudo ausearch -c 'tshark' --raw | audit2allow -M mi-tshark
-sudo semodule -X 300 -i mi-tshark.pp
+ausearch -c '(tshark)' --raw | audit2allow -M mi-tshark
+semodule -i mi-tshark.pp
 sudo systemctl daemon-reload
 sudo systemctl start tshark.service
 
