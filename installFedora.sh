@@ -126,14 +126,13 @@ echo "Code Verification:" $codigo | sudo tee -a config-elastic.txt
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 
-echo -e "\e[1;32m*******************************************"
-echo -e "*                                         *"
-echo -e "*           Creando el tshark           *"
-echo -e "*                                         *"
-echo -e "*******************************************\e[0m"
-sudo dnf -y install wireshark-cli
-echo "#!/bin/bash" | sudo tee -a /home/$USER/tshark.sh
-echo "sudo tshark" | sudo tee -a /home/$USER/tshark.sh
+#echo -e "\e[1;32m*******************************************"
+#echo -e "*                                         *"
+#echo -e "*           Creando el tshark           *"
+#echo -e "*                                         *"
+#echo -e "*******************************************\e[0m"
+#echo "#!/bin/bash" | sudo tee -a /home/$USER/tshark.sh
+#echo "sudo tshark" | sudo tee -a /home/$USER/tshark.sh
 
 
 echo -e "\e[1;32m*******************************************"
@@ -141,17 +140,18 @@ echo -e "*                                         *"
 echo -e "*           Creando el servicio           *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
+sudo dnf -y install wireshark-cli
 echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
-echo "ExecStart=/home/$USER/tshark.sh" | sudo tee -a /etc/systemd/system/tshark.service
+echo "ExecStart=/usr/bin/tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 
-sudo setenforce 0
-#sudo ausearch -c 'tshark' --raw | audit2allow -M mi-tshark
-#sudo semodule -X 300 -i mi-tshark.pp
+#sudo setenforce 0
+sudo ausearch -c 'tshark' --raw | audit2allow -M mi-tshark
+sudo semodule -X 300 -i mi-tshark.pp
 sudo systemctl daemon-reload
 sudo systemctl start tshark.service
 
