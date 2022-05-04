@@ -128,7 +128,7 @@ sudo systemctl disable firewalld
 
 #echo -e "\e[1;32m*******************************************"
 #echo -e "*                                         *"
-#echo -e "*           Creando el tshark           *"
+#echo -e "*           Creando el tshark             *"
 #echo -e "*                                         *"
 #echo -e "*******************************************\e[0m"
 #echo "#!/bin/bash" | sudo tee -a /home/$USER/tshark.sh
@@ -149,10 +149,21 @@ echo "ExecStart=/usr/bin/tshark" | sudo tee -a /etc/systemd/system/tshark.servic
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 
+
+echo "[Unit]" | sudo tee -a /etc/systemd/system/seten.service
+echo "Description=seten" | sudo tee -a /etc/systemd/system/seten.service
+echo "[Service]" | sudo tee -a /etc/systemd/system/seten.service
+echo "Type=simple" | sudo tee -a /etc/systemd/system/seten.service
+echo "ExecStart=setenforce 0" | sudo tee -a /etc/systemd/system/seten.service
+echo "[Install]" | sudo tee -a /etc/systemd/system/seten.service
+echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/seten.service
+
+
 #sudo setenforce 0
-ausearch -c '(tshark)' --raw | audit2allow -M mi-tshark
-semodule -i mi-tshark.pp
+#ausearch -c '(tshark)' --raw | audit2allow -M mi-tshark
+#semodule -i mi-tshark.pp
 sudo systemctl daemon-reload
+sudo systemctl start seten.service
 sudo systemctl start tshark.service
 
 echo -e "\e[1;32m*******************************************"
