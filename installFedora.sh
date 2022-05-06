@@ -136,30 +136,20 @@ echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
-echo "ExecStart=/usr/bin/tshark" | sudo tee -a /etc/systemd/system/tshark.service
+echo "ExecStart= tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
-echo -e "*        Creando el servicio seten        *"
+echo -e "*        Creación de poliza Tshark        *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-echo "[Unit]" | sudo tee -a /etc/systemd/system/seten.service
-echo "Description=seten" | sudo tee -a /etc/systemd/system/seten.service
-echo "[Service]" | sudo tee -a /etc/systemd/system/seten.service
-echo "Type=simple" | sudo tee -a /etc/systemd/system/seten.service
-echo "ExecStart=setenforce 0" | sudo tee -a /etc/systemd/system/seten.service
-echo "[Install]" | sudo tee -a /etc/systemd/system/seten.service
-echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/seten.service
-
-
-#sudo setenforce 0
-#ausearch -c '(tshark)' --raw | audit2allow -M mi-tshark
-#semodule -i mi-tshark.pp
+sudo grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
+sudo semodule -i TsharkPolice.pp
 sudo systemctl daemon-reload
-sudo systemctl start seten.service
 sudo systemctl start tshark.service
+sudo systemctl enable tshark.service
 
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
