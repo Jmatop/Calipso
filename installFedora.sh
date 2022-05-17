@@ -18,24 +18,6 @@ sudo dnf -y install suricata && sudo sed -i "s|eth0|enp0s3|" /etc/sysconfig/suri
 sudo systemctl start suricata
 sudo systemctl enable suricata
 
-echo -e "\e[1;32m*****************************************"
-echo -e "*                                       *"
-echo -e "*           Instalación Apache          *"
-echo -e "*                                       *"
-echo -e "*****************************************\e[0m"
-sudo dnf -y install httpd
-
-echo -e "\e[1;32m********************************************"
-echo -e "*                                          *"
-echo -e "*           Instalación IP Tracer          *"
-echo -e "*                                          *"
-echo -e "********************************************\e[0m"
-git clone https://github.com/rajkumardusad/IP-Tracer.git
-cd IP-Tracer
-chmod +x install
-./install
-cd $HOME
-
 echo -e "\e[1;32m***************************************"
 echo -e "*                                     *"
 echo -e "*           Instalación Java          *"
