@@ -136,7 +136,7 @@ echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
-echo "ExecStart= tshark" | sudo tee -a /etc/systemd/system/tshark.service
+echo 'ExecStart= tshark -Y "icmp||arp||(http && http.request.method == POST)||tcp||udp||dhcp"' | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 
@@ -145,12 +145,14 @@ echo -e "*                                         *"
 echo -e "*        Creación de poliza Tshark        *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-sudo grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
-sudo semodule -i TsharkPolice.pp
-sudo systemctl daemon-reload
-sudo systemctl start tshark.service
-sudo systemctl enable tshark.service
-
+sudo -s
+grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
+semodule -i TsharkPolice.pp
+sleep 30
+systemctl daemon-reload
+systemctl start tshark.service
+systemctl enable tshark.service
+exit
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*           Creando lectores              *"
@@ -165,8 +167,6 @@ echo "journalctl -u tshark.service | grep -c UDP  > /home/$USER/salidaUDP.data" 
 echo "journalctl -u tshark.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
 echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
 echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
-
-
 
 echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
 
