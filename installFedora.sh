@@ -134,7 +134,7 @@ sleep 30
 systemctl daemon-reload
 systemctl start tshark.service
 systemctl enable tshark.service
-exit
+logout
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*           Creando lectores              *"
