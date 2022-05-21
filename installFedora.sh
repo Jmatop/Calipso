@@ -121,15 +121,17 @@ echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
 echo 'ExecStart= tshark -Y "icmp||arp||(http && http.request.method == POST)||tcp||udp||dhcp"' | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
-
+systemctl daemon-reload
+systemctl start tshark.service
+systemctl enable tshark.service
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*        Creación de poliza Tshark        *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-sudo -s
-grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
-semodule -i TsharkPolice.pp
+sudo grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
+sleep 10
+sudo semodule -i TsharkPolice.pp
 sleep 30
 systemctl daemon-reload
 systemctl start tshark.service
