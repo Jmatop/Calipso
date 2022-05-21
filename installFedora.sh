@@ -118,7 +118,8 @@ echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
-echo 'ExecStart= tshark -Y "icmp||arp||(http && http.request.method == POST)||tcp||udp||dhcp"' | sudo tee -a /etc/systemd/system/tshark.service
+#echo 'ExecStart= tshark -Y "icmp||arp||(http && http.request.method == POST)||tcp||udp||dhcp"' | sudo tee -a /etc/systemd/system/tshark.service
+echo 'ExecStart= tshark -Y "icmp||arp||tcp||udp"' | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.service
 systemctl daemon-reload
