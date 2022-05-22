@@ -1,0 +1,2 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"DOS SYN packet flood inbound";  flow:to_server; flags: S; threshold: type both, track by_dst, count 100, seconds 1; classtype:misc-activity;  sid:5000000;)
+alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"PING FLOOD"; itype:8; content:"|10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F|"; depth:32; threshold: type both, track by_dst, count 100, seconds 1; classtype:misc-activity; sid:2100366; rev:8;
