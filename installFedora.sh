@@ -118,6 +118,7 @@ echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Type=simple" | sudo tee -a /etc/systemd/system/tshark.service
+echo "ExecStartPre = setenforce 0" | sudo tee -a /etc/systemd/system/tshark.service
 #echo 'ExecStart= tshark -Y "icmp||arp||(http && http.request.method == POST)||tcp||udp||dhcp"' | sudo tee -a /etc/systemd/system/tshark.service
 echo 'ExecStart= tshark -Y "icmp||arp||tcp||udp"' | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Install]" | sudo tee -a /etc/systemd/system/tshark.service
@@ -125,19 +126,32 @@ echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/tshark.servi
 systemctl daemon-reload
 systemctl start tshark.service
 systemctl enable tshark.service
+
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
-echo -e "*        Creación de poliza Tshark        *"
+echo -e "*       Instalación FluentBit             *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-sudo grep tshark /var/log/audit/audit.log | audit2allow -M TsharkPolice
-sleep 10
-sudo semodule -i TsharkPolice.pp
-sleep 30
-systemctl daemon-reload
-systemctl start tshark.service
-systemctl enable tshark.service
-su usuario
+sudo dnf install git cmake flex bison gcc gcc-c++ systemd-devel
+git clone https://github.com/fluent/fluent-bit 
+cd fluent-bit/build
+cmake ../
+make
+sudo make install
+echo -e "\e[1;32m*************************************************"
+echo -e "*                                               *"
+echo -e "*       Creación Servicio FluentBit             *"
+echo -e "*                                               *"
+echo -e "*************************************************\e[0m"
+echo "[Unit]" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "Description=FluentBit" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "After=network-online.target" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "Requires=network-online.target" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "[Service]" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "ExecStart=/usr/local/bin/fluent-bit -c /usr/local/etc/fluent-bit/fluent-bit.conf" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "[Install]" | sudo tee -a /etc/systemd/system/fluent-bit.service
+echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/fluent-bit.service
+
 echo -e "\e[1;32m*******************************************"
 echo -e "*                                         *"
 echo -e "*           Creando lectores              *"
