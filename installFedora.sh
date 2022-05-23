@@ -16,7 +16,7 @@ echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
 ip=$(hostname -I | awk '{print $1}')
 sudo dnf -y install suricata && sudo sed -i "s|eth0|enp0s3|" /etc/sysconfig/suricata
-sudo sed -i "s|HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0./12\]\"|#HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0./12\]\"|" /etc/suricata/suricata.yaml
+sudo sed -i "s|HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12\]\"|#HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12\]\"|" /etc/suricata/suricata.yaml
 sudo sed -i "s|#HOME_NET: \"\[192.168.0.0/16]\"|HOME_NET: \"$ip\"|" /etc/suricata/suricata.yaml
 sudo sed -i "s|- interface: eth0|- interface: enp0s3|" /etc/suricata/suricata.yaml
 sudo systemctl start suricata
