@@ -14,7 +14,11 @@ echo -e "*                                         *"
 echo -e "*           Instalación Suricata          *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
+ip=$(hostname -I | awk '{print $1}')
 sudo dnf -y install suricata && sudo sed -i "s|eth0|enp0s3|" /etc/sysconfig/suricata
+sudo sed -i "s|HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0./12\]\"|#HOME_NET: \"\[192.168.0.0/16,10.0.0.0/8,172.16.0.0./12\]\"|" /etc/suricata/suricata.yaml
+sudo sed -i "s|#HOME_NET: \"\[192.168.0.0/16]\"|HOME_NET: \"$ip\"|" /etc/suricata/suricata.yaml
+sudo sed -i "s|- interface: eth0|- interface: enp0s3|" /etc/suricata/suricata.yaml
 sudo systemctl start suricata
 sudo systemctl enable suricata
 
@@ -48,8 +52,8 @@ echo -e "***********************************************\e[0m"
 sudo dnf -y install --enablerepo=elasticsearch elasticsearch > prueba.txt
 #Reiniciamos el systemd y habilitamos e iniciamos el servicio de elasticsearch 
 sudo /bin/systemctl daemon-reload
-sudo /bin/systemctl enable elasticsearch.service
 sudo systemctl start elasticsearch.service
+sudo /bin/systemctl enable elasticsearch.service
 #Guardamos en una variable la contraseña, haciendo una busqueda en el fichero prueba.txt que es el que contiene la salida de la instalación
 pass=$(cat prueba.txt | grep "generated password for the elastic built-in superuser " | awk '{print $11}')
 #Lo guardamos en el fichero que va a contener todas las credenciales necesarias para el usuario
@@ -167,5 +171,5 @@ echo "journalctl -u tshark.service | grep -c ARP  > /home/$USER/salidaARP.data" 
 echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
 echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
 
-echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601\e[0m"
+echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601 y mire el fichero config-elastic.txt\e[0m"
 
