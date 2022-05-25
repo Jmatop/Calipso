@@ -117,7 +117,8 @@ echo -e "*                                         *"
 echo -e "*       Creando el servicio tshark        *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-sudo dnf -y install wireshark-cli
+sudo dnf -y install 
+sudo dnf -y install wireshark-cli speedtest-cli
 echo "[Unit]" | sudo tee -a /etc/systemd/system/tshark.service
 echo "Description=Tshark" | sudo tee -a /etc/systemd/system/tshark.service
 echo "[Service]" | sudo tee -a /etc/systemd/system/tshark.service
