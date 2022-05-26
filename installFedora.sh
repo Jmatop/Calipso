@@ -138,7 +138,7 @@ echo -e "*                                         *"
 echo -e "*       Instalación FluentBit             *"
 echo -e "*                                         *"
 echo -e "*******************************************\e[0m"
-sudo dnf install git cmake flex bison gcc gcc-c++ systemd-devel
+sudo dnf -y install git cmake flex bison gcc gcc-c++ systemd-devel
 git clone https://github.com/fluent/fluent-bit 
 cd fluent-bit/build
 cmake ../
