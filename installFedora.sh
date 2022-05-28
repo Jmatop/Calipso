@@ -158,20 +158,5 @@ echo "ExecStart=/usr/local/bin/fluent-bit -c /usr/local/etc/fluent-bit/fluent-bi
 echo "[Install]" | sudo tee -a /etc/systemd/system/fluent-bit.service
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/fluent-bit.service
 
-echo -e "\e[1;32m*******************************************"
-echo -e "*                                         *"
-echo -e "*           Creando lectores              *"
-echo -e "*                                         *"
-echo -e "*******************************************\e[0m"
-echo "#!/bin/bash" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c ICMP > /home/$USER/salidaICMP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c DHCP > /home/$USER/salidaDHCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c HTTP > /home/$USER/salidaHTTP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c [S]  > /home/$USER/salidaTCP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c UDP  > /home/$USER/salidaUDP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "journalctl -u tshark.service | grep -c ARP  > /home/$USER/salidaARP.data" | sudo tee -a /home/$USER/.lector.sh
-echo "#Fluenbit" | sudo tee -a /home/$USER/.lector.sh
-echo "#rm /home/$USER/salida*" | sudo tee -a /home/$USER/.lector.sh
-
 echo -e "\e[1;32m Ya está todo Instalado, para acabar de configurar Kibana, vaya a: Ip_Màquina:5601 y mire el fichero config-elastic.txt\e[0m"
 
