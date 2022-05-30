@@ -21,3 +21,5 @@ Then you can run:
 git clone https://github.com/Jmatop/Calipso.git
 ```
 For install Calipso only run ``` cd Calipso``` ```sudo chmod +x InstallFedora.sh``` ``` sudo bash install.sh```
+
+Once everything is downloaded, inside the Calypso folder we find a file with the name *config-elastic* which within said file will be registered the password of kibana itself, once we have it copied we open the browser and go to the address *http://ip:5601*
