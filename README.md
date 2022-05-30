@@ -26,4 +26,21 @@ Once everything is downloaded, inside the Calypso folder we find a file with the
 
 And we enter the requirements that it asks us, which are in the file mentioned above.
 
-We return to the terminal and what we must do now is move the *test.rules* file to the necessary path. To do this ``` mv test.rules /var/lib/suricata/rules/ ```
+We return to the terminal and what we must do now is move the *test.rules* file to the necessary path.
+To do this ``` mv test.rules /var/lib/suricata/rules/ ```
+
+Now we have to edit the suricata file:
+``` sudo nano /etc/suricata/suricata.yaml ```
+Inside this file we need to find the *rule-files* and replace the line suricata.rules for:
+``` test.rules ```
+
+When we do that we need to download the GeoIP Database called *GeoLite2-Country.mmdb*, then we enter on the github and we download it:
+*https://github.com/P3TERX/GeoLite.mmdb*
+
+When we download it the file *GeoLite2-Country.mmdb* we move it to * /usr/share/GeoIP*
+
+```sudo mv GeoLite2-Country.mmdb /usr/share/GeoIP/```
+
+Finally we need to edit the fluent-bit file called */home/$USER/Calipso/pruebafinal.conf*
+we go to the final lines and we need to edit 
+
