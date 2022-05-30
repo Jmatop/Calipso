@@ -20,4 +20,4 @@ Then you can run:
 ```
 git clone https://github.com/Jmatop/Calipso.git
 ```
-For install Calipso only run ``` cd Calipso``` ``` sudo bash install.sh```
+For install Calipso only run ``` cd Calipso``` ```sudo chmod +x InstallFedora.sh``` ``` sudo bash install.sh```
