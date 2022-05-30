@@ -42,5 +42,5 @@ When we download it the file *GeoLite2-Country.mmdb* we move it to * /usr/share/
 ```sudo mv GeoLite2-Country.mmdb /usr/share/GeoIP/```
 
 Finally we need to edit the fluent-bit file called */home/$USER/Calipso/pruebafinal.conf*
-we go to the final lines and we need to edit 
+we need to edit this lines and put on *Host* the ip of elastic server and the HTTP_Passwd we put the password of elastic server ![Screenshot_1](https://user-images.githubusercontent.com/91370388/171038528-5aac6e98-f076-4312-808e-da41ebcaacac.png)
 
