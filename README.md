@@ -22,4 +22,8 @@ git clone https://github.com/Jmatop/Calipso.git
 ```
 For install Calipso only run ``` cd Calipso``` ```sudo chmod +x InstallFedora.sh``` ``` sudo bash install.sh```
 
-Once everything is downloaded, inside the Calypso folder we find a file with the name *config-elastic* which within said file will be registered the password of kibana itself, once we have it copied we open the browser and go to the address *http://ip:5601*
+Once everything is downloaded, inside the Calypso folder we find a file with the name *config-elastic* which within said file will be registered the password of kibana itself, once we have it copied we open the browser and go to the address *http://ip-elastic:5601*
+
+And we enter the requirements that it asks us, which are in the file mentioned above.
+
+We return to the terminal and what we must do now is move the *test.rules* file to the necessary path. To do this ``` mv test.rules /var/lib/suricata/rules/ ```
