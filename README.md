@@ -52,5 +52,11 @@ Now we exec fluent-bit file:
 ``` sudo fluent-bit -c pruebafinal.conf ```
 We go to Kibana and on Menu we select Stack Management and there we select saved objects and we export the file *export(1).ndjson*
 
+![Screenshot_2](https://user-images.githubusercontent.com/91370388/171039233-e154696c-4f12-41dd-b551-e9162560b85e.png)
+
 When we do that now we select the Dashboards and we have all there.
+
+![Screenshot_1](https://user-images.githubusercontent.com/91370388/171039359-b0147b57-700d-48d7-bf4f-19afb10d0031.png)
+![Screenshot_2](https://user-images.githubusercontent.com/91370388/171039391-498a6eb6-1923-46f5-bf7b-6b761bedce47.png)
+
 
